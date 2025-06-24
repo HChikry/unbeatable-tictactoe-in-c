@@ -151,8 +151,7 @@ int SaveGameplayIntoFile(GameplayNode *head, int game_mode,
   GetTitleFileName(titles_file_name, game_mode);
 
   // First file
-  FILE *titles_file = fopen(titles_file_name, "r");
-  if (titles_file == NULL) return 1;
+  FILE *titles_file = fopen(titles_file_name, "a+");
   int number_of_saved_games = count_number_of_saved_games(titles_file);
   fclose(titles_file);
 
