@@ -143,16 +143,15 @@ static int count_number_of_saved_games(FILE *file) {
   return games_count;
 }
 
-int SaveTheGameplay(GameplayNode *head, int game_mode, const char *game_title,
-                    bool is_user_played_first) {
+int SaveGameplayIntoFile(GameplayNode *head, int game_mode,
+                         const char *game_title, bool is_user_played_first) {
   char moves_file_name[MAX_FILE_TITLE_LENGTH] = {0};
   char titles_file_name[MAX_FILE_TITLE_LENGTH] = {0};
   GetMovesFileName(moves_file_name, game_mode);
   GetTitleFileName(titles_file_name, game_mode);
 
   // First file
-  FILE *titles_file = fopen(titles_file_name, "r");
-  if (titles_file == NULL) return 1;
+  FILE *titles_file = fopen(titles_file_name, "a+");
   int number_of_saved_games = count_number_of_saved_games(titles_file);
   fclose(titles_file);
 

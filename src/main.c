@@ -35,13 +35,13 @@ int main(void) {
 }  // end of the main
 
 void PlayingAgainstComputer(void) {
-  int menu_choice = 0;
   GameplayNode *head = NULL;  // linked list to store gameplay moves
   bool should_user_play = false;
-  int game_mode_choice = GetGameplayMode();
+  int game_mode_choice = 0;
+  int menu_choice = 2;
 
   do {
-    DeleteTheGameplay(&head);  // sets also head to NULL at the end
+    DeleteTheGameplay(&head);
     if (2 == menu_choice) game_mode_choice = GetGameplayMode();
     should_user_play = IsUserWillPlayFirst();
 
@@ -77,8 +77,8 @@ void PlayingAgainstComputer(void) {
              DEFAULT_SAVED_GAMEPLAY_NAME, save_number);
   }
 
-  if (SaveTheGameplay(head, game_mode_choice, gameplay_title,
-                      should_user_play)) {
+  if (SaveGameplayIntoFile(head, game_mode_choice, gameplay_title,
+                           should_user_play)) {
     SavedGameMessage(gameplay_title, false);
     // puts("\nerror in SaveTheGameplay");
     // return 1;`
@@ -90,8 +90,6 @@ void PlayingAgainstComputer(void) {
   return;
 }  // end of first choice
 
-/// @brief
-/// @param
 void PlayingWithFriends(void) {
   int number_of_players = GetNumberOfPlayers();
   if (number_of_players > 2) DisplayMultiplePlayerRules();
